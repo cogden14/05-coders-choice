@@ -23,7 +23,7 @@ import "phoenix_html"
 // Source: https://github.com/tensor-programming/phoenix_1.3_chat_app/blob/master/assets/js/app.js
 
 let channel_field = $('channel');
-let channel = socket.channel('chat_room:12', {});
+let channel = socket.channel('chat_room:lobby', {});
 let list = $('#message-list');
 let message = $('#message');
 let name = $('#username');
@@ -33,18 +33,18 @@ let urgent_val = "unchecked";
 let peripheral_val = "unchecked";
 message.on('keypress', event => {
     if (event.keyCode == 13) {
-        if(channel_field.val() == "12")
-        {
-            channel = socket.channel('chat_room:12', {});
-            channel
+        const channel_name = channel_field.val();
+
+        channel = socket.channel(`chat_room:${channel_name}`, {});
+        channel
             .join()
             .receive('ok', resp => {
-            console.log('Joined successfully', resp);
-             })
+                console.log('Joined successfully', resp);
+            })
             .receive('error', resp => {
                 console.log('Unable to join', resp);
             });
-        }
+
         if (urgent.is(":checked"))
         {
           urgent_val = "checked";

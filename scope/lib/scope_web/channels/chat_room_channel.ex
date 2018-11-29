@@ -10,7 +10,7 @@ defmodule ScopeWeb.ChatRoomChannel do
     end
   end
 
-  def join("chat_room:" <> _private_room_id, payload, socket) do
+  def join("chat_room:" <> private_room_id, payload, socket) do
     if authorized?(payload) do
       send(self(), :after_join)
       {:ok, socket}
