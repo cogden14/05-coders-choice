@@ -1,0 +1,7 @@
+Chat Supervisor
+    - Server - topic - pubsub
+    - State - messages
+    
+    - User
+    - user_state
+        - read_mesages
